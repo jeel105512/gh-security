@@ -6,7 +6,7 @@ on:
 jobs:
   assign-label:
     permissions:
-      issues: write
+      issues: read
     runs-on: ubuntu-latest
     steps:
       - name: Assign label
@@ -14,7 +14,7 @@ jobs:
         run: |
           curl -X POST \
           --url https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \
-          -H 'authorization: Bearer ${{ secrets.BEARER_TOKEN }}' \
+          -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           -H 'content-type: application/json' \
           -d '{
               "labels": ["bug"]
